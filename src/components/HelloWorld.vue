@@ -31,6 +31,7 @@
 
   <p>共计消费：{{totalPrice}}，人均消费：{{ input ? totalPrice/(input / 1) : totalPrice}}</p>
       <el-button class='five' type="warning" round  @click="fiveList">随机五个菜</el-button>
+      <el-button class='' type="warning" round  @click="clear">一键删除</el-button>
       <el-button type="primary" round @click="type0">随机一个大荤</el-button>
       <el-button type="primary" round @click="type1">随机一个小荤</el-button>
       <el-button type="primary" round @click="type2">随机一个素菜</el-button>
@@ -91,6 +92,15 @@ export default {
       var index  = Math.floor(Math.random() * arr.length)
       this.list.push(arr.splice(index,1)[0])
     },
+    clear(){
+      for(let i = 0; i < this.list.length;i++){
+        this.json.push(this.list[i]);
+      }
+      //this.json.concat(this.list)
+      //console.log(this.json.length)
+      this.list = []
+      $('.five').removeAttr('disabled')
+    },
     //随机一个凉菜
     onecool(){
 
@@ -111,7 +121,7 @@ export default {
       for(let i = 0; i < this.json.length;i++){
 
         if(this.json[i].type / 1 == type){
-          console.log(this.json[i].type)
+         // console.log(this.json[i].type)
           total.push(this.json[i])
         }
       }
